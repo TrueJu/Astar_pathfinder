@@ -1,13 +1,13 @@
 // Initialise the needed variables
 let f = h = g = 0;
 let path = [];
-let map = [[0,  0,  0,  0,  0],
+let map = [[0,  0,  0,  0,  0],  //0 => free space, 1 => wall
            [0,  0,  0,  0,  0],
            [0,  0,  1,  0,  0],
            [0,  0,  1,  0,  0],
            [0,  0,  1,  0,  0]];
-let start = [1, 1];
-let end = [4, 4];
+let start = [1, 1]; //Start coordinates in map matrix
+let end = [4, 4]; //Target coordinates in map matrix
 let relatives = [[0, 1], [1, 1], [1, 0], [1, -1], [0, -1], [-1, -1], [-1, 0], [-1, 1]];
 //                 >               /^                 <                  ^             
 
@@ -50,10 +50,8 @@ function aStar(map, start, end) {
         }
 
         for(test=1;test>0;test--) {
-            console.log("test");
             tmp_current = current;
             tmp = Math.min(...moves);
-            console.log("fk" + tmp);
             next_direction = moves.indexOf(tmp);
             next_direction = next_direction == -1 ? (moves.length) -1 : next_direction;
 
@@ -62,13 +60,10 @@ function aStar(map, start, end) {
             if(map[current[0]][current[1]] == 1) {
                 moves = moves.splice(next_direction, 1);
                 current = tmp_current;
-                console.log("ups");
                 test++;
             } else if(map[current[0]][current[1]] == 0) {
                 test--;
-                console.log("lkel");
             } else {
-                console.log("crash");
                 process.exit();
             }
         }
@@ -80,7 +75,6 @@ function aStar(map, start, end) {
                 map[path[k][0]][path[k][1]] = "#";
             }
             console.log(map);
-            console.log("Hello World!");
             break;
         } else {
             i++
